@@ -73,11 +73,12 @@ for _ in 0..<10 {
 /***********************************************/
 //Int sort test
 arr
-arr = arr.sort(<)
+arr.sort(<)
 arr.sort(>)
 arr.sort(mySort1)
 arr.sort(mySort2)
 arr.sort(mySort3)
+arr = arr.sort(<)
 binarySearch(65, arr)
 
 //String Sort Test
