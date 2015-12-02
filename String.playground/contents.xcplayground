@@ -4,5 +4,7 @@
         <page name='Simple'/>
         <page name='GetFirstCharFromChinese'/>
         <page name='Encode'/>
+        <page name='TypeTrans'/>
+        <page name='ASCII'/>
     </pages>
 </playground>
