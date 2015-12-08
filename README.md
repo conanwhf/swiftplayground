@@ -1,7 +1,7 @@
 # MyPlayground In Swift
 > This is a playground for Conan by Xcode. It include the basic trying code while studying the Swift. There are small code snippets too, and ready to build a real project.
 > 
-> 自己的一个练习场地，包含学习Swift & iOS 开发的一些练习代码，以及实现的一些小功能，为实战开发项目做积累。
+> 自己的一个练习场地，包含学习Swift & iOS 开发的一些练习代码，以及实现的一些小功能，为实战开发项目做积累。每个playground里面分别有几个page，Xcode默认显示第一个，View->Navigators->Show Project Navigator显示Page列表
 
 ## File list:
 
@@ -25,7 +25,10 @@ As String is a useful & complex type, which is have more extra define such as NS
 
 - **Simple**，简单的常用例子
 2. **GetFirstCharFromChinese**，中文提取拼音首字母
-3. （TBD）**Encode**，字符编码的一些东西
+3. **Encode**，字符编码的一些东西
+4. **NS**，NS系列相互的类型转换，包括String, NSString，NSData，NSURL
+5. **TypeTans**，String和其他数据类型的转换，包括16进制转换
+6. **ASCII**，简单的Ascii码转换函数
 
 
 ### Exercise_Demo
