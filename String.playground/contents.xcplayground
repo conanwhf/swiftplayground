@@ -4,6 +4,7 @@
         <page name='Simple'/>
         <page name='GetFirstCharFromChinese'/>
         <page name='Encode'/>
+        <page name='NS-'/>
         <page name='TypeTrans'/>
         <page name='ASCII'/>
     </pages>
