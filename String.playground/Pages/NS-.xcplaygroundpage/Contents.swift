@@ -10,7 +10,7 @@ let enc           = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEnc
 
     //NSString & String
     nstr              = str
-    nstr              = String(str)
+    str                = String(nstr!)
 
     // String to NSURL
     let utf8str       = str.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
@@ -30,7 +30,7 @@ let enc           = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEnc
     data              = str.dataUsingEncoding(NSUnicodeStringEncoding)
     data              = str.dataUsingEncoding(NSASCIIStringEncoding)
     data              = nstr?.dataUsingEncoding(NSUTF8StringEncoding)
-    data              = url!.absoluteString.dataUsingEncoding(NSUTF8StringEncoding)
+    data              = url?.absoluteString.dataUsingEncoding(NSUTF8StringEncoding)
 
     // NSData to Anything
     str               = String(data: data!, encoding: NSUTF8StringEncoding)!

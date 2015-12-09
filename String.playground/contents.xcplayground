@@ -7,5 +7,6 @@
         <page name='NS-'/>
         <page name='TypeTrans'/>
         <page name='ASCII'/>
+        <page name='Regular'/>
     </pages>
 </playground>

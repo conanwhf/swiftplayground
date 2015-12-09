@@ -26,9 +26,10 @@ As String is a useful & complex type, which is have more extra define such as NS
 - **Simple**，简单的常用例子
 2. **GetFirstCharFromChinese**，中文提取拼音首字母
 3. **Encode**，字符编码的一些东西
-4. **NS**，NS系列相互的类型转换，包括String, NSString，NSData，NSURL
+4. **NS-**，NS系列相互的类型转换，包括String, NSString，NSData，NSURL
 5. **TypeTans**，String和其他数据类型的转换，包括16进制转换
 6. **ASCII**，简单的Ascii码转换函数
+7. **Regular**，正则表达式匹配的实现
 
 
 ### Exercise_Demo
