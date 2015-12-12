@@ -4,7 +4,8 @@
         <page name='Sort'/>
         <page name='Draw'/>
         <page name='JSON'/>
-        <page name='SimCity'/>
         <page name='Math'/>
+        <page name='Rename'/>
+        <page name='File'/>
     </pages>
 </playground>

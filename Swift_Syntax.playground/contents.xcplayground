@@ -5,7 +5,9 @@
         <page name='String'/>
         <page name='MultiElement'/>
         <page name='Function'/>
-        <page name='DefineType'/>
+        <page name='Closures'/>
+        <page name='Enum'/>
+        <page name='Class&amp;Struct'/>
         <page name='Standarfunction'/>
     </pages>
 </playground>

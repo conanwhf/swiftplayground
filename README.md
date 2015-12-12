@@ -12,6 +12,7 @@ Swift语法学习代码，包括各种类型和语法特性，以及和C不同�
 1. **String**，字符串和字符
 1. **MultiElement**，数组，集合，字典
 1. **Function**，函数
+2. **Enum**，枚举
 1. (TBD)闭包
 1. (TBD)枚举，类，结构体
 1. (TBD)构造和析构
@@ -50,6 +51,8 @@ Some tests for Cocoa UI API
 一些自己写着玩的东西，有的是测试，有的是探索
 
 - （TBD）**JSON**，JSON数据获得和解析
+1. **Rename**，因为下载导致的文件名乱码修复
+2. **Sort**，
 2. **Math**，
+3. **File**，Swift文件操作
 3. **Draw**，一个拿函数画图的合集，画着玩
-

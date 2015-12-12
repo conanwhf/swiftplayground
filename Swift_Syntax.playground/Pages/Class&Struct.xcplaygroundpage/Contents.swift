@@ -2,7 +2,9 @@
 
 import Foundation
 
+var str = "Hello, playground"
 
+//: [Next](@next)
 func typedefine(){
     /*************************************/
     struct Human {
@@ -24,5 +26,5 @@ func typedefine(){
         case little_miao, little_wang
     }
     let me:Famliy = .miaomiao
-    debugPrint(me)
+    print(me)
 }
