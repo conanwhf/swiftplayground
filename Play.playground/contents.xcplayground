@@ -7,5 +7,6 @@
         <page name='Math'/>
         <page name='Rename'/>
         <page name='File'/>
+        <page name='GetXML'/>
     </pages>
 </playground>
