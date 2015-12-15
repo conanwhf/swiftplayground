@@ -37,8 +37,6 @@ As String is a useful & complex type, which is have more extra define such as NS
 The demos for my study list.
 我的[小项目练习列表](https://github.com/conanwhf/ResourceDoc/blob/master/tryList.md)实现，写在Playground中的部分
 
--  
-
 
 ### UI_Test
 Some tests for Cocoa UI API
@@ -50,9 +48,10 @@ Some tests for Cocoa UI API
 ### Play
 一些自己写着玩的东西，有的是测试，有的是探索
 
-- （TBD）**JSON**，JSON数据获得和解析
-1. **Rename**，因为下载导致的文件名乱码修复
-2. **Sort**，
+- **Sort**，sort()的几个测试
+1. **Draw**，一个拿函数画图的合集，画着玩
+2. **JSON**，JSON数据获得和解析
 2. **Math**，
+1. **Rename**，因为下载导致的文件名乱码修复
 3. **File**，Swift文件操作
-3. **Draw**，一个拿函数画图的合集，画着玩
+4. **GetXML**，XML解析

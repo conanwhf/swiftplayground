@@ -2,8 +2,7 @@
 
 import Foundation
 
-let _INDEX_URL = "http://api.wenxuecity.com/service/api/?act=index&picnum=3&pagenum="
-//let _INDEX_URL = "https://raw.githubusercontent.com/GavinIsTheKing/TestXML/master/test.xml"
+let _INDEX_URL = "https://raw.githubusercontent.com/GavinIsTheKing/TestXML/master/test.xml"
 //let _INDEX_URL = "https://raw.githubusercontent.com/zhengkai/phpcs_test/master/ruleset.xml"
 
 
@@ -22,17 +21,14 @@ func saveURLtoFile() -> Bool {
     }
 }
 
-//getDataFromURL(1)
-
-
 class XmlReader: NSObject, NSXMLParserDelegate {
     var currentName :String? = nil
     var level :Int = 0
     
-    override init() {
+    init(add :String ) {
         
         super.init()
-        let url = NSURL(string:_INDEX_URL)!
+        let url = NSURL(string:add)!
         guard let parserXML = NSXMLParser(contentsOfURL: url) else {
             return
         }
@@ -43,13 +39,13 @@ class XmlReader: NSObject, NSXMLParserDelegate {
     
    //文档开始时触发 ,开始解析时 只触发一次
     func parserDidStartDocument(parser: NSXMLParser) {
-        print("11111 start")
+        print("    start")
     }
     
     
     // // 遇到文档结束时触发，进入该方法就意味着解析完成，需要清理一些成员变量，同时要将数据返回给表示层（表示图控制器） 通过广播机制将数据通过广播通知投送到 表示层
     func parserDidEndDocument(parser: NSXMLParser){
-        print("1111 end")
+        print("    end")
     }
     
    //遇到一个开始标签触发
@@ -60,14 +56,9 @@ class XmlReader: NSObject, NSXMLParserDelegate {
         print("\(level) start, \(elementName), \(attributeDict)")
         
         if currentName == "language" {
-           // 获取list节点下 value属性的内容
+           // 获取language属性的内容
             //print("---------\(attributeDict)")
         }
-        
-        if currentName == "rule" {
-            //print("--------------\(attributeDict)")
-        }
-        
     }
     
     
@@ -96,5 +87,5 @@ class XmlReader: NSObject, NSXMLParserDelegate {
     
 }
 
-//XmlReader()
+//XmlReader(add: _INDEX_URL)
 

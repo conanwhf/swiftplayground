@@ -11,26 +11,25 @@ extension String {
     }
 }
 
-
-let manager = NSFileManager.defaultManager()        //根控制器
+let manager        = NSFileManager.defaultManager()//根控制器
 // String 表示文件&文件夹路径
-let HOME = NSHomeDirectory()        //用户目录，根据运行环境不同而不同
-let workdir = HOME + "/Documents/Shared Playground Data/"   // 测试用
+NSHomeDirectory()
+NSHomeDirectoryForUser("Conan")
+let HOME           = NSHomeDirectory()//用户目录，根据运行环境不同而不同
+let workdir        = HOME + "/Documents/Shared Playground Data/"// 测试用
 // NSURL 表示文件&文件夹路径
-let urlForDocument = manager.URLsForDirectory( NSSearchPathDirectory.DocumentDirectory, inDomains:NSSearchPathDomainMask.UserDomainMask)        //获得用户Document目录
+let urlForDocument = manager.URLsForDirectory( NSSearchPathDirectory.DocumentDirectory, inDomains:NSSearchPathDomainMask.UserDomainMask)//获得用户Document目录
 //let url = urlForDocument[0] as NSURL
-
-
 
 
 /**
 创建文件、文件夹、符号链接
 */
 func createFiles() {
-    var fn = workdir + "/NewDir/"
-    let url = workdir.toFilePathURL
+    var fn    = workdir + "/NewDir/"
+    let url   = workdir.toFilePathURL
     let fnUrl = url.URLByAppendingPathComponent("/urlNewDir/", isDirectory: true)
-    
+
     // Floder Creator
     do {
         // withIntermediateDirectories为ture表示路径中间如果有不存在的文件夹都会创建
@@ -38,26 +37,26 @@ func createFiles() {
     } catch {
         print("Error by createDirectoryAtPath: \(error)\n")
     }
-    
+
     do {
         try manager.createDirectoryAtURL(fnUrl, withIntermediateDirectories: true, attributes: nil)
     } catch {
         print("Error by createDirectoryAtURL: \(error)\n")
     }
-    
+
     // File
-    fn = workdir + "try.txt"
+    fn          = workdir + "try.txt"
     manager.createFileAtPath(fn, contents: nil , attributes: nil)
-    
+
     //Symbolic Link
     do {
         try manager.createSymbolicLinkAtPath(workdir + "tryLink.txt", withDestinationPath: fn)
     } catch {
         print("Error by createSymbolicLinkAtPath: \(error)\n")
     }
-    
+
     do {
-        let linkurl = url.URLByAppendingPathComponent("link-url", isDirectory: false)
+    let linkurl = url.URLByAppendingPathComponent("link-url", isDirectory: false)
         try manager.createSymbolicLinkAtURL(linkurl, withDestinationURL: fnUrl)
     } catch {
         print("Error by createSymbolicLinkAtURL: \(error)\n")
@@ -75,16 +74,16 @@ func traversal( dir : String) {
     
     // 1-1 不遍历子文件夹，返回指定目录路径下的文件、子目录及符号链接的列表，相对文件名，包括隐藏文件
     do {
-        let contentsOfPath = try manager.contentsOfDirectoryAtPath(dir)
+    let contentsOfPath   = try manager.contentsOfDirectoryAtPath(dir)
         contentsOfPath.forEach{ print($0) }
         print("Done 1-1")
     } catch {
         print("-----------Error by 1-1: \(error)\n")
     }
-    
+
     // 1-2 NSURL形式，同1-1，返回绝对路径的文件名列表（“file://XXXXXX”），忽略隐藏文件
     do {
-        let contentsOfURL = try manager.contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
+    let contentsOfURL    = try manager.contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
         contentsOfURL.forEach{ print($0) }
         print("Done 1-2")
     } catch {
@@ -103,7 +102,7 @@ func traversal( dir : String) {
     }
 
     // 2-2 NSURL形式，同2-1，返回绝对路径的文件名，忽略隐藏文件
-    let enumeratorAtURL = manager.enumeratorAtURL(url,includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles, errorHandler:nil)
+    let enumeratorAtURL  = manager.enumeratorAtURL(url,includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles, errorHandler:nil)
     if enumeratorAtURL == nil  {
         print("------------Error by 2-2: no such folder: \(url)")
         //return
@@ -114,7 +113,7 @@ func traversal( dir : String) {
     }
 
     // 3- 递归遍历子文件夹，包括符号链接
-    let subpathsAtPath = manager.subpathsAtPath(dir)
+    let subpathsAtPath   = manager.subpathsAtPath(dir)
     if subpathsAtPath == nil  {
         print("------------Error by 3: no such folder: \(dir)")
         //return
@@ -133,22 +132,22 @@ func traversal( dir : String) {
  - parameter fn: 文件名
  */
 func readFromFile(fn: String, way : Int) {
-    let fnUrl = fn.toFilePathURL
+    let fnUrl   = fn.toFilePathURL
     var data : NSData?
-    
+
     switch way {
     case 1 :
         // 直接读取数据
-        data = manager.contentsAtPath(fn)
+    data        = manager.contentsAtPath(fn)
     case 2 :
         // 使用file handler
-        let handler = NSFileHandle(forReadingAtPath: fn)
-        data = handler?.readDataToEndOfFile()
+    let handler = NSFileHandle(forReadingAtPath: fn)
+    data        = handler?.readDataToEndOfFile()
     case 3:
         // 使用file handler -URL
         do {
-            let handler = try NSFileHandle(forReadingFromURL: fnUrl)
-            data = handler.readDataToEndOfFile()
+    let handler = try NSFileHandle(forReadingFromURL: fnUrl)
+    data        = handler.readDataToEndOfFile()
         } catch {
             print("Error by NSFileHandle: \(error)\n")
         }
@@ -156,12 +155,12 @@ func readFromFile(fn: String, way : Int) {
         print("Error for way, return!")
         return
     }
-    
+
     guard data != nil else {
         print("No such file : \(fn) !")
         return
     }
-    let st = String(data: data!, encoding: NSUTF8StringEncoding)!
+    let st      = String(data: data!, encoding: NSUTF8StringEncoding)!
     print("-------------Way \(way): \n\(st)")
 }
 
@@ -174,24 +173,24 @@ func readFromFile(fn: String, way : Int) {
  */
 func writeToFile(fn: String){
     // String
-    let info = "测试数据1234"
+    let info        = "测试数据1234"
     do {
         try info.writeToFile(fn + "_string.txt", atomically: true, encoding: NSUTF8StringEncoding)
     } catch {
         print("Error by writeToFile: \(error)\n")
     }
-    
+
     // 图片
-    let image = UIImage(named: workdir + "/test/207006981.jpg")
+    let image       = UIImage(named: workdir + "/test/207006981.jpg")
     let data:NSData = UIImagePNGRepresentation(image!)!
     data.writeToFile(fn + "_img.jpg", atomically: true)
-    
+
     // NSArray保存
-    let array = NSArray(objects: "aaa","bbb","ccc")
+    let array       = NSArray(objects: "aaa","bbb","ccc")
     array.writeToFile(fn + "_arr.txt", atomically: true)
 
     // NSDictionary保存
-    let dictionary = NSDictionary(objects: ["111","222"], forKeys: ["aaa","bbb"])
+    let dictionary  = NSDictionary(objects: ["111","222"], forKeys: ["aaa","bbb"])
     dictionary.writeToFile(fn + "_dic.txt", atomically: true)
 }
 
@@ -202,14 +201,14 @@ func writeToFile(fn: String){
  - parameter dest: <#dest description#>
  */
 func copyFile(src: String, dest : String){
-    
+
     do {
         try manager.copyItemAtPath(src, toPath: dest)
     } catch let error as NSError {
         print("Error by Path: \(error)\n")
     }
-    
-    let srcUrl = src.toFilePathURL
+
+    let srcUrl  = src.toFilePathURL
     let destUrl = (dest + "url.txt").toFilePathURL
     do {
         try manager.copyItemAtURL( srcUrl, toURL: destUrl)
@@ -229,31 +228,31 @@ func copyFile(src: String, dest : String){
  - parameter fn: <#fn description#>
  */
 func modifyFile( fn: String) {
-    
-    let fnUrl = fn.toFilePathURL
-    var string = "\n用forUpdatingAtURL在文件第10个字节插入XXX\n"
-    var data = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+
+    let fnUrl   = fn.toFilePathURL
+    var string  = "\n用forUpdatingAtURL在文件第10个字节插入XXX\n"
+    var data    = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
 
     // URL to handler
     do {
-        let handler = try NSFileHandle(forUpdatingURL: fnUrl)
+    let handler = try NSFileHandle(forUpdatingURL: fnUrl)
         handler.seekToFileOffset(10)
-        let data2 = handler.readDataToEndOfFile()
+    let data2   = handler.readDataToEndOfFile()
         handler.seekToFileOffset(10)
         handler.writeData(data)
         handler.writeData(data2)
     } catch {
         print("Error by NSFileHandle: \(error)\n")
     }
-    
+
     // Another way to get the handler (by PATH)
     let handler = NSFileHandle(forUpdatingAtPath: fn)
     guard handler != nil else {
         print("No such file")
         return
     }
-    string = "\n用forUpdatingAtPath在文件末尾添加XXX"
-    data = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+    string      = "\n用forUpdatingAtPath在文件末尾添加XXX"
+    data        = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
     handler!.seekToEndOfFile()
     handler!.writeData(data)
 }
@@ -270,8 +269,8 @@ func moveFile(src: String, dest: String){
     } catch {
         print("Error by Path: \(error)\n")
     }
-    
-    let srcUrl = dest.toFilePathURL
+
+    let srcUrl  = dest.toFilePathURL
     let destUrl = src.toFilePathURL
     do {
         try manager.moveItemAtURL( srcUrl, toURL: destUrl)
@@ -311,15 +310,15 @@ func removeFile(fn: String){
  */
 func attributesForFile(fn: String) {
     //权限判断
-    let readable = manager.isReadableFileAtPath(fn)
-    let writeable = manager.isWritableFileAtPath(fn)
+    let readable   = manager.isReadableFileAtPath(fn)
+    let writeable  = manager.isWritableFileAtPath(fn)
     let executable = manager.isExecutableFileAtPath(fn)
     let deleteable = manager.isDeletableFileAtPath(fn)
     print("文件\(fn) \(readable ? "" : "不")可读， \(writeable ? "" : "不")可写，\(executable ? "" : "不")可执行，\(deleteable ? "" : "不")可删除")
-    
+
     //获取文件属性
     do {
-        let attributes = try manager.attributesOfItemAtPath(fn)
+    let attributes = try manager.attributesOfItemAtPath(fn)
             print("attributes: \(attributes)")
     } catch {
         print("Error by attributesOfItemAtPath: \(error)\n")
@@ -329,8 +328,8 @@ func attributesForFile(fn: String) {
 
 
 //  1. 判断文件或文件夹是否存在
-manager.fileExistsAtPath(workdir)
-manager.fileExistsAtPath(workdir + "aaa.txt")
+//manager.fileExistsAtPath(workdir)
+//manager.fileExistsAtPath(workdir + "aaa.txt")
 
 //  2. 创建文件/文件夹/链接
 //createFiles()
@@ -360,8 +359,8 @@ manager.fileExistsAtPath(workdir + "aaa.txt")
 //removeFile(workdir + "urlNewDir")
 
 // 10. 文件属性和权限
-attributesForFile(workdir + "read.md")
+//attributesForFile(workdir + "read.md")
 
 // 11. 比较文件/文件夹
-manager.contentsEqualAtPath(workdir + "read.md", andPath: workdir + "copied.txt")
-manager.contentsEqualAtPath(workdir, andPath: workdir + "/tesst/")
+//manager.contentsEqualAtPath(workdir + "read.md", andPath: workdir + "copied.txt")
+//manager.contentsEqualAtPath(workdir, andPath: workdir + "/tesst/")
