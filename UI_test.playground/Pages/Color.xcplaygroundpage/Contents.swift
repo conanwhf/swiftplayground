@@ -1,10 +1,12 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
+let backView = UIView(frame:CGRectMake(0.0, 0.0, 320.0,  480.0))
 
 func RGBA (r:Int, g:Int, b:Int, a:Int)->UIColor {
     return UIColor (red : CGFloat(Float(r)/255.0) , green:CGFloat(Float(g)/255.0) , blue:CGFloat(Float(b)/255.0) , alpha:CGFloat(Float(a)/255.0))
 }
+
 
 func showTheColor(){
     
@@ -23,32 +25,28 @@ func showTheColor(){
         "fFF":      (r:0,g:200,b:100,name:""),
         "eEE":      (r:0,g:100,b:200,name:"")
     ]
-    var backView = UIView(frame:CGRectMake(0.0, 0.0, 320.0, CGFloat(colors.count*50)))
+
     var index = 0
     
     for (i,j) in colors{
-        var colorStripe = UILabel(frame: CGRectMake(0.0, CGFloat(index++ * 50), 320.0, 48.0))
+        let colorStripe = UILabel(frame: CGRectMake(0.0, CGFloat(index++ * 50), 320.0, 48.0))
         
         backView.addSubview(colorStripe)
-        colorStripe.backgroundColor = RGBA(j.r, j.g, j.b, 255)
+        colorStripe.backgroundColor = RGBA(j.r, g: j.g, b: j.b, a: 255)
         //colorName.textAlignment
         colorStripe.font = UIFont(name:"Arial",size:20.0)
-        colorStripe.textColor = RGBA(128-j.r, 128-j.g, 128-j.b, 128)
+        colorStripe.textColor = RGBA(128-j.r, g: 128-j.g, b: 128-j.b, a: 128)
         colorStripe.text = "\(i) \(j.name)"
     }
     
     backView.backgroundColor = UIColor.purpleColor()
     
     //Another way to get the list:
-    for (i,j) in enumerate(colors){
-        println("index=\(i), key=\(j.0), name=\(j.1.name)\n\t\(RGBA(j.1.r, j.1.g, j.1.b, 255))")
+    for (i,j) in colors.enumerate(){
+        print("index=\(i), key=\(j.0), name=\(j.1.name)\n\t\(RGBA(j.1.r, g: j.1.g, b: j.1.b, a: 255))")
     }
 }
 
 
-func widgets(){
-    
-}
-
 showTheColor()
-widgets()
+
