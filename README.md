@@ -56,3 +56,6 @@ Some tests for Cocoa UI API
 1. **Rename**，因为下载导致的文件名乱码修复
 3. **File**，Swift文件操作
 4. **GetXML**，XML解析
+
+### WenXueCity
+某新闻网站拿取新闻的Demo，两个版本。第一遍直接写流程，后来重写数据结构，用OO定义数据
