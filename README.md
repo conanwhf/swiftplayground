@@ -35,14 +35,15 @@ As String is a useful & complex type, which is have more extra define such as NS
 
 ### Exercise_Demo
 The demos for my study list.
-我的[小项目练习列表](https://github.com/conanwhf/ResourceDoc/blob/master/tryList.md)实现，写在Playground中的部分
+已转移到[练手小项目](https://github.com/conanwhf/iOS_ShortPractice)
 
 
 ### UI_Test
 Some tests for Cocoa UI API
 对Cocoa UI控件API的一些测试，主要是了解用法
 
--  
+-  **Color**
+1. **Text**
 
 
 ### Play
