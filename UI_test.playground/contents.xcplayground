@@ -3,5 +3,7 @@
     <pages>
         <page name='Color'/>
         <page name='Text'/>
+        <page name='View'/>
+        <page name='RGB_UIColor'/>
     </pages>
 </playground>

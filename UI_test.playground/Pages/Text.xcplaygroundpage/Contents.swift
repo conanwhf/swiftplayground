@@ -2,10 +2,11 @@
 
 import UIKit
 
-var backView = UIView(frame:CGRectMake(0.0, 0.0, 320.0,  480.0))
+let backView = UIView(frame:CGRectMake(0.0, 0.0, 480,  640.0))
+let frame = CGRectMake(20, 30, 360, 500)
 
 func textFiled() {
-        let textField = UITextField(frame: CGRectMake(10,160,200,30))
+        let textField = UITextField(frame: frame)
         //设置边框样式为圆角矩形
         textField.borderStyle = UITextBorderStyle.RoundedRect
         textField.returnKeyType = UIReturnKeyType.Done
@@ -22,21 +23,29 @@ func textFiled() {
 }
 
 func showHTML() {
-    let html = "<div style=\"background-color:#F1F1F1; font-size:14px; color:#304182; \n  text-align:center; margin-left:10px; padding-right:10px\"> \n<p>iOS <span style=\"font-size:18px; color:#E88834;\">Developer</span> Tips</p>中文\n</div>"
-    //let html = "<div style=\"text-align: center;\"><img alt=\"\" border=\"0\" src= \"http://img1.cache.netease.com/catchpic/2/27/27ED954D15175AF0BD2A89E0040B1D44.jpg\"><br> <br> 爆炸地点位于二楼。<br> 测试结束"
+    let post = UITextView(frame: frame)
     let opt = [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType]
+    let img_width = Int(post.frame.width / 2 )
+    let fontsize = 16
+
+    let test1 = "<div style=\"background-color:#F1F1F1; font-size:14px; color:#304182; \n  text-align:center; margin-left:10px; padding-right:10px\"> \n<p>iOS <span style=\"font-size:18px; color:#E88834;\">Developer中文测试</span> Tips</p>\n</div>"
+    let test2 = "<div><img border=\"0\" src=\"http://img3.cache.netease.com/cnews/2015/12/24/2015122414411004ab6.jpg\"/></div><br/>现场图<br/><br/><img border=\"0\" src=\"http://img4.cache.netease.com/cnews/2015/12/24/2015122414411078bf4.jpg\"/><br/><br/>邓景辉<br/><br/><br/>据南华早报微博消息，早上约7时12分，香港太古城宝安阁一名40多岁男子从高处堕下，救护员接报到场，将堕楼男子送东区医院抢救后不治。警方正调查事件。据报堕楼的男子为有“新闻王子”之称的亚视前主播邓景辉。dbc行政总裁罗灿已到东区医院了解事件。<br/><br/><b>个人经历</b><br/><br/>测试结束<br/><br/>"
+    var config = "img{max-width:\(img_width)px !important;}"   //img style
+    config.appendContentsOf("body {font-size:\(fontsize)px;}")   //body style
+    config.appendContentsOf("h1{font-size: \(fontsize+4)px}")      //title style
+    config = "<head><style>" + config + "</style></head>"
     
-    let text = try? NSMutableAttributedString(data: html.dataUsingEncoding(NSUnicodeStringEncoding)!, options:opt, documentAttributes: nil)
-    //NSMutableAttributedString(string: html, attributes: opt)
+    let html = config + "<h1>标题测试</h1><hr/>" + test1 + test2
     
-    let textLayer: CATextLayer = CATextLayer()
-    textLayer.frame = CGRectMake(10, 60, 300, 400)
-    textLayer.string =  text
-    backView.layer.addSublayer(textLayer)
+    do{
+        let attributedString = try NSMutableAttributedString(data: html.dataUsingEncoding(NSUnicodeStringEncoding)!, options:opt, documentAttributes: nil)
+        post.attributedText = attributedString
+        
+        backView.addSubview(post)
+    }catch {print(error)}
 }
 
 backView.backgroundColor = UIColor.grayColor()
 //textFiled()
-showHTML()
-backView
+//showHTML()
 

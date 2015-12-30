@@ -42,8 +42,10 @@ The demos for my study list.
 Some tests for Cocoa UI API
 对Cocoa UI控件API的一些测试，主要是了解用法
 
--  **Color**
-1. **Text**
+-  **Color**，颜色测试
+1. **Text**，Text，主要是HTML显示
+2. **View**，UIView拿基本参数
+3. **RGB_UIColor**，16进制颜色与UIColor互转
 
 
 ### Play
