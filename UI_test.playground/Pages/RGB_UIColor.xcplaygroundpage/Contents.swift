@@ -4,7 +4,7 @@ import UIKit
 
 let view = UIView(frame:CGRectMake(0.0, 0.0, 480,  640.0))
 
-//16进制颜色与UIColor互转
+//16进制转UIColor
 func HexToColor(color: String) -> UIColor {
      let char = color.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString.characters
         
@@ -19,15 +19,28 @@ func HexToColor(color: String) -> UIColor {
         return UIColor.clearColor()
     }
     
-    let rgb = (r: Float((res & 0xFF0000)>>16), g: Float((res & 0xFF00)>>8), b: Float(res & 0xFF))
-    return UIColor(red: CGFloat(rgb.r/255.0), green: CGFloat(rgb.g/255.0), blue: CGFloat(rgb.b/255.0), alpha: 1.0)
+    let rgb = (r: CGFloat((res & 0xFF0000)>>16), g: CGFloat((res & 0xFF00)>>8), b: CGFloat(res & 0xFF))
+    return UIColor(red: (rgb.r/255.0), green: (rgb.g/255.0), blue: (rgb.b/255.0), alpha: 1.0)
 }
 
-func colorToHex(color: UIColor) -> (String, CGFloat) {
+
+//UIColor转16进制
+func colorToHex(color: UIColor?) -> (String, CGFloat) {
     var rgba: (CGFloat, CGFloat, CGFloat, CGFloat) = (0,0,0,0)
-    color.getRed(&rgba.0, green: &rgba.1, blue: &rgba.2, alpha: &rgba.3)
+    if color != nil {
+        color!.getRed(&rgba.0, green: &rgba.1, blue: &rgba.2, alpha: &rgba.3)
+    }
     return (String(format:"%02X%02X%02X",Int(rgba.0*255), Int(rgba.1*255),Int(rgba.2*255)),  alpha: rgba.3)
 }
 
+//精度测试，确认转换不会丢失信息
+let a  = Array.init(0...255)
+let b = a.map{ CGFloat($0)/255.0 }
+let c = b.map{ Int($0*255) }
+a.elementsEqual(c)
+
+
 view.backgroundColor = HexToColor("#44558F")
-colorToHex(view.backgroundColor!)
+colorToHex(view.backgroundColor)
+
+

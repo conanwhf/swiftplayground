@@ -45,7 +45,7 @@ Some tests for Cocoa UI API
 -  **Color**，颜色测试
 1. **Text**，Text，主要是HTML显示
 2. **View**，UIView拿基本参数
-3. **RGB_UIColor**，16进制颜色与UIColor互转
+3. **RGB_UIColor**，16进制表示的RGB颜色与UIColor互转
 
 
 ### Play
@@ -58,6 +58,7 @@ Some tests for Cocoa UI API
 1. **Rename**，因为下载导致的文件名乱码修复
 3. **File**，Swift文件操作
 4. **GetXML**，XML解析
+5. **precision**，类型精度测试
 
 ### WenXueCity
 某新闻网站拿取新闻的Demo，两个版本。第一遍直接写流程，后来重写数据结构，用OO定义数据

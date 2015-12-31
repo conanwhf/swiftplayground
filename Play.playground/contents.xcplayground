@@ -8,5 +8,6 @@
         <page name='Rename'/>
         <page name='File'/>
         <page name='GetXML'/>
+        <page name='Precision'/>
     </pages>
 </playground>
