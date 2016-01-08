@@ -28,3 +28,18 @@ func typedefine(){
     let me:Famliy = .miaomiao
     print(me)
 }
+
+
+class MyClass : Comparable {
+    var key : Int = 0
+}
+
+func < (left: MyClass, right: MyClass) -> Bool {
+    return left.key < right.key
+}
+
+func == (left: MyClass, right: MyClass) -> Bool{
+    return left.key == right.key
+}
+
+

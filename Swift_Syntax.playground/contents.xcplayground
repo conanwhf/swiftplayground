@@ -9,5 +9,6 @@
         <page name='Enum'/>
         <page name='Class&amp;Struct'/>
         <page name='Standarfunction'/>
+        <page name='Extersion'/>
     </pages>
 </playground>

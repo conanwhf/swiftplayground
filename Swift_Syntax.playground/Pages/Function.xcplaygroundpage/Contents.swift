@@ -137,6 +137,9 @@ func funtype_demo(){
 /**
 *  this part show the Nested Functions
 */
-base_demo()
-parameter_demo()
-funtype_demo()
+//base_demo()
+//parameter_demo()
+//funtype_demo()
+
+let testlog : (AnyObject, AnyObject?) -> () = ({ print(" func: \(__FUNCTION__) in \(__FILE__): \($0), from \($1)")})
+testlog(3, "555")
