@@ -140,6 +140,11 @@ func base(){
     conan["China"]
     hy[2015]=30
     hy["Singapore"]
+    
+    let conan2=conan
+    let conan3=MyClass(name: "Conan")
+    conan2===conan
+    conan3===conan
 }
 
 
