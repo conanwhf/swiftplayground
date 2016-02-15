@@ -9,5 +9,6 @@
         <page name='File'/>
         <page name='GetXML'/>
         <page name='Precision'/>
+        <page name='DateTime'/>
     </pages>
 </playground>

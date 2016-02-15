@@ -40,23 +40,20 @@ func getDataFromURL() -> NSData? {
     }
     
     // for test, save to file
-    let manager = NSFileManager.defaultManager()
-    manager.createFileAtPath( NSHomeDirectory()+"/Desktop/wether.json" , contents: data, attributes: nil)
+    //let manager = NSFileManager.defaultManager()
+    //manager.createFileAtPath( NSHomeDirectory()+"/wether.json" , contents: data, attributes: nil)
     
     return data
 }
 
 
-
-    guard let data = getDataFromURL() else {
-        exit(0)
-        }
+func parserJSON(){
+    guard let data = getDataFromURL() else {  exit(0)  }
     do {
         let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
         json
         // Dict case
         let dic : NSDictionary? = json["person"] as? NSDictionary
-
         // Array case
         let arr : NSArray? = dic?["employees"] as? NSArray
         arr?.count
@@ -68,4 +65,37 @@ func getDataFromURL() -> NSData? {
     } catch {
         print("JSONObjectWithData: \(error)")
     }
+}
+
+
+
+func createJSON(){
+    //利用字典NSDictionary转换为键/值格式的数据。
+    // 如果数组或者字典中存储了  NSString, NSNumber, NSArray, NSDictionary, or NSNull 之外的其他对象,就不能直接保存成文件了.也不能序列化成 JSON 数据.
+    let dict: [NSObject : AnyObject] = ["name":"me", "do":"something", "with":"her", "address":"home"]
+    // 判断当前对象是否能够转换成JSON数据.YES if obj can be converted to JSON data, otherwise NO
+    if NSJSONSerialization.isValidJSONObject(dict) {
+        do {
+            let jsonData: NSData = try NSJSONSerialization.dataWithJSONObject(dict, options: .PrettyPrinted)
+            jsonData.writeToFile(NSHomeDirectory()+"/dict.json", atomically: true)
+            print("\(NSString(data: jsonData, encoding: NSUTF8StringEncoding))")
+        }  catch {
+            print("JSON数据生成失败，请检查数据格式")
+        }
+    }
     
+    //通过JSON序列化可以转换数组，但转换结果不是标准化的JSON格式。
+    let array: [AnyObject] = ["qn","18","ya","wj"]
+    if NSJSONSerialization.isValidJSONObject(array) {
+        do {
+            let data: NSData = try NSJSONSerialization.dataWithJSONObject(array, options: .PrettyPrinted)
+            data.writeToFile(NSHomeDirectory()+"/test.json", atomically: true)
+            print("\(NSString(data: data, encoding: NSUTF8StringEncoding))")
+        } catch {
+            print("JSON数据生成失败，请检查数据格式")
+        }
+    }
+}
+
+parserJSON()
+createJSON()

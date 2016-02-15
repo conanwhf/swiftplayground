@@ -45,7 +45,24 @@ func showHTML() {
     }catch {print(error)}
 }
 
+/**
+ 显示X的n次方
+ */
+func showX_N(n:Int){
+    let fontsizeX:CGFloat = 40.0
+    let fontX = UIFont(name: "Helvetica", size: fontsizeX)
+    let fontN = UIFont(name: "Helvetica", size: fontsizeX/2)
+    let post = UITextView(frame: frame)
+    let strN = "\(n)"
+    
+    let attributedString:NSMutableAttributedString = NSMutableAttributedString(string: "X"+strN, attributes: [NSFontAttributeName:fontX!])
+    attributedString.setAttributes([NSFontAttributeName:fontN!,NSBaselineOffsetAttributeName: fontsizeX/2], range: NSRange(location:1,length:strN.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
+    post.attributedText = attributedString
+    
+    backView.addSubview(post)
+}
+
 backView.backgroundColor = UIColor.grayColor()
 //textFiled()
 //showHTML()
-
+//showX_N(3)

@@ -14,9 +14,10 @@ Swift语法学习代码，包括各种类型和语法特性，以及和C不同�
 1. **Function**，函数
 2. **Enum**，枚举
 1. **Closures**，闭包
-1. (TBD)枚举，类，结构体
-1. (TBD)构造和析构
-1. (TBD)泛型和扩展
+1. **Enum**，枚举
+2. **Class&Struct**，类，结构体
+1. **ARC**，自动引用计数
+1. **Protocol**，协议
 1. **StandardFunc**，常用标准函数
 
 
@@ -53,12 +54,14 @@ Some tests for Cocoa UI API
 
 - **Sort**，sort()的几个测试
 1. **Draw**，一个拿函数画图的合集，画着玩
-2. **JSON**，JSON数据获得和解析
+2. **JSON**，JSON数据获得和解析，以及生成JSON数据
 2. **Math**，
 1. **Rename**，因为下载导致的文件名乱码修复
 3. **File**，Swift文件操作
 4. **GetXML**，XML解析
-5. **precision**，类型精度测试
+5. **Precision**，类型精度测试
+6. **DateTime**，时间日期相关
+
 
 ### WenXueCity
 某新闻网站拿取新闻的Demo，两个版本。第一遍直接写流程，后来重写数据结构，用OO定义数据
