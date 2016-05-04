@@ -44,7 +44,7 @@ Some tests for Cocoa UI API
 对Cocoa UI控件API的一些测试，主要是了解用法
 
 -  **Color**，颜色测试
-1. **Text**，Text，主要是HTML显示
+1. **Text**，Text，主要是HTML显示和字体
 2. **View**，UIView拿基本参数
 3. **RGB_UIColor**，16进制表示的RGB颜色与UIColor互转
 
@@ -61,6 +61,7 @@ Some tests for Cocoa UI API
 4. **GetXML**，XML解析
 5. **Precision**，类型精度测试
 6. **DateTime**，时间日期相关
+7. **System**，系统状态相关
 
 
 ### WenXueCity

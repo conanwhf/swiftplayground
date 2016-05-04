@@ -62,7 +62,37 @@ func showX_N(n:Int){
     backView.addSubview(post)
 }
 
+
+/*获取字符串的宽度和高度*/
+func contentCellWithText(text: String, font: UIFont?, maxWidth: CGFloat = CGFloat.max, maxHeight: CGFloat = CGFloat.max) -> CGSize {
+    let textFont = (font==nil ? UIFont(name: "Arial", size: 20)! : font!)
+    let tdic = [NSFontAttributeName : textFont]
+    var size: CGSize = CGSizeMake(CGFloat.max, CGFloat.max)
+   
+    size = text.boundingRectWithSize(size, options: [.UsesLineFragmentOrigin, .UsesFontLeading], attributes: tdic, context: nil).size
+    return size
+}
+
+//打印当前可用字体
+func printAllFonts() {
+    let fontFamilies = UIFont.familyNames()
+    for i in fontFamilies {
+        let names = UIFont.fontNamesForFamilyName(i)
+        print("Famliy: \(i)- \(names)")
+    }
+}
+
+//检查某字体是否已经下载
+func isFontDownloaded(fontName: String) -> Bool {
+    let aFont = UIFont(name: fontName, size: 12.0)
+    let isDownloaded: Bool = (aFont != nil && (aFont?.fontName.compare(fontName) == .OrderedSame  || aFont?.familyName.compare(fontName) == .OrderedSame ))
+    return isDownloaded
+}
+
 backView.backgroundColor = UIColor.grayColor()
 //textFiled()
 //showHTML()
 //showX_N(3)
+//contentCellWithText("测试", font: UIFont(name: "Arial", size: 40))
+//printAllFonts()
+isFontDownloaded("Arial")

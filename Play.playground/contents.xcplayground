@@ -10,5 +10,6 @@
         <page name='GetXML'/>
         <page name='Precision'/>
         <page name='DateTime'/>
+        <page name='System'/>
     </pages>
 </playground>
