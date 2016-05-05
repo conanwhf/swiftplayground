@@ -2,10 +2,6 @@
 
 import UIKit
 
-var str = "Hello, playground"
-
-//: [Next](@next)
-
 func getDiskSize()->(free:Int, total: Int){
     let fm = NSFileManager.defaultManager()
     do {

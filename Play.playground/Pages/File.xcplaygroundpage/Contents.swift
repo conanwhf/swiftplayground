@@ -11,6 +11,19 @@ extension String {
     }
 }
 
+
+//Home目录
+let homeDirectory = NSHomeDirectory()
+//Documents目录 苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包含此目录
+let documentPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+//Library目录  这个目录下有2个子目录：Caches缓存 , Preferences偏好设置,不应该直接创建偏好设置文件而使用NSUserDefaults类
+let libraryPaths =  NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.LibraryDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+//Cache目录 主要存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出时删除
+let cachesPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+//tmp目录  用于存放临时文件，保持应用程序再次启动过程中不需要的信息，重启后清空
+let tmpDir = NSTemporaryDirectory()
+
+
 let manager        = NSFileManager.defaultManager()//根控制器
 // String 表示文件&文件夹路径
 NSHomeDirectory()
@@ -364,3 +377,12 @@ func attributesForFile(fn: String) {
 // 11. 比较文件/文件夹
 //manager.contentsEqualAtPath(workdir + "read.md", andPath: workdir + "copied.txt")
 //manager.contentsEqualAtPath(workdir, andPath: workdir + "/tesst/")
+
+
+// 从路径中获得完整的文件名（带后缀）
+NSURL(fileURLWithPath: "/home/conan/123.txt").lastPathComponent
+// 获得文件名（不带后缀）
+NSString(string: NSURL(fileURLWithPath: "/home/conan/123.txt").lastPathComponent!).stringByDeletingPathExtension
+// 获得文件的扩展类型（不带'.'）
+NSURL(fileURLWithPath: "/home/conan/123.txt").pathExtension
+

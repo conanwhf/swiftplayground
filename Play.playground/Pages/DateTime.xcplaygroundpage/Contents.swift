@@ -35,92 +35,46 @@ func getWeekFromLocal() -> String {
     return dateString
 }
 
-/**
- 1.今年
- 1.1> 今天
- * 1分内： 刚刚
- * 1分~59分内：xx分钟前
- * 大于60分钟：xx小时前
- 1.2> 昨天
- * 昨天 xx:xx
- 1.3> 其他
- * xx-xx xx:xx
- 2.非今年
- 2.1> xxxx-xx-xx xx:xx
- */
-func compareTime(when:NSDate, now:NSDate=NSDate()) -> String {
-
-    func isThisYear(creatDate: NSDate) -> Bool {
-        var calendar: NSCalendar = NSCalendar.currentCalendar()
-        var dateCmps: NSDateComponents = calendar.components(.Year, fromDate: creatDate)
-        var nowCmps: NSDateComponents = calendar.components(.Year, fromDate: NSDate())
-        return dateCmps.year == nowCmps.year
-    }
-    
-    func isToday(creatDate: NSDate) -> Bool {
-        /** 另一种方法*/
-        var fmt: NSDateFormatter = NSDateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd"
-        var now: NSDate = NSDate()
-        var nowStr: String = fmt.stringFromDate(now)
-        var dateStr: String = fmt.stringFromDate(creatDate)
-        return (nowStr == dateStr)
-    }
-    
-    func isYesterday(creatDate: NSDate) -> Bool {
-        var fmt: NSDateFormatter = NSDateFormatter()
-        fmt.dateFormat = "dd"
-        var now: NSDate = NSDate()
-        var nowStr: String = fmt.stringFromDate(now)
-        var dateStr: String = fmt.stringFromDate(creatDate)
-        var isSure: Bool = false
-        if Int(nowStr)! - Int(dateStr)! == 1 {
-            isSure = true
-        }
-        //WBLog(@"%d",xx);
-        return isSure
-    }
-    
-    
-    //1，美国时间转为中国时间
-    //2, 转为各种模式显示
-    let fmt = NSDateFormatter()
-    var calendar: NSCalendar = NSCalendar.currentCalendar()
-    //计算两个日期之间的差值,NSCalendarUnit枚举代表想获得哪些差值
-    var unit: NSCalendarUnit = [.Year, .Month, .Day, .Hour, .Minute]
-    var cmps: NSDateComponents = calendar.components(unit, fromDate: when, toDate: now, options: .MatchStrictly)
-    if isThisYear(when) {
-        if isYesterday(when) {
-            fmt.dateFormat = "昨天 HH:mm"
-            return fmt.stringFromDate(when)
-        }
-        else if isToday(when) {
-            if cmps.hour > 1 {
-                return "\(cmps.hour)小时前"
-            }
-            else if cmps.minute > 1 {
-                return "\(cmps.minute)分钟前"
-            }
-            else {
-                return "刚刚"
-            }
-        }
-        else {
-            //今年其他日子
-            fmt.dateFormat = "MM-dd HH:mm"
-            return fmt.stringFromDate(when)
-        }
-    }
-    else {
-        //非今年
-        fmt.dateFormat = "yyyy-MM-dd HH:mm"
-        return fmt.stringFromDate(when)
-    }
+//判断是否同一天
+func isSameDay(when:NSDate, now:NSDate=NSDate()) -> Bool {
+    let fmt: NSDateFormatter = NSDateFormatter()
+    fmt.dateFormat = "yyyy-MM-dd"
+    return (fmt.stringFromDate(now) == fmt.stringFromDate(when))
 }
 
+//比较两个时间
+func compareTime(when:NSDate, now:NSDate=NSDate()) -> String {
+    let calendar: NSCalendar = NSCalendar.currentCalendar()
+    //计算两个日期之间的差值,NSCalendarUnit枚举代表想获得哪些差值
+    let unit: NSCalendarUnit = [.Year, .Month, .Day, .Hour, .Minute]
+    let cmps: NSDateComponents = calendar.components(unit, fromDate: when, toDate: now, options: .MatchStrictly)
+    //print(cmps)
+    if cmps.year != 0 {
+        return "\(cmps.year.distanceTo(0)) 年" + (cmps.year>0 ? "前" : "后")
+    }
+    if cmps.month != 0 {
+        return "\(cmps.month.distanceTo(0)) 个月" + (cmps.month>0 ? "前" : "后")
+    }
+    if cmps.day != 0 {
+        return "\(cmps.day.distanceTo(0)) 天" + (cmps.day>0 ? "前" : "后")
+    }
+    if cmps.hour != 0 {
+        return "\(cmps.hour.distanceTo(0)) 小时" + (cmps.hour>0 ? "前" : "后")
+    }
+    if cmps.minute != 1 {
+        return "\(cmps.minute.distanceTo(0)) 分钟" + (cmps.minute>0 ? "前" : "后")
+    }
+    return "刚刚"
+}
 
+/**判断当前时间是否处于某个时间段内 */
+func validateWithStartTime(start: NSDate, withExpireTime expire: NSDate, time:NSDate = NSDate() ) -> Bool {
+    return time.compare(start) == .OrderedDescending && time.compare(expire) == .OrderedAscending
+}
 
-let a=getNSDateByString("Thu Oct 16 17:06:25 +0700 2015",fmt: "EEE MMM dd HH:mm:ss Z yyyy")
+let a=getNSDateByString("Thu Oct 16 17:06:25 +0700 2015",fmt: "EEE MMM dd HH:mm:ss Z yyyy")!
 getStringByNSDate(NSDate())
 getWeekFromLocal()
-compareTime(a!)
+compareTime(NSDate(), now: a)
+isSameDay(a,now:a)
+validateWithStartTime(getNSDateByString("2016-05-05 21:17:00")!, withExpireTime: getNSDateByString("2017-05-05 21:20:00")!)

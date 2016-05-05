@@ -2,7 +2,7 @@
 
 import UIKit
 
-let backView = UIView(frame:CGRectMake(0.0, 0.0, 100.0,  300.0))
+let backView = UIView(frame:CGRectMake(0.0, 0.0, 600.0, 500.0))
 
 func transform(demo: UIView) {
     //缩放参数
@@ -44,7 +44,30 @@ func corner(demo: UIView){
     demo.layer.cornerRadius = min(demo.frame.height, demo.frame.width)/2
 }
 
+
+func circleImage(image: UIImage, withParam w: CGFloat) -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.mainScreen().scale)
+    let context: CGContextRef = UIGraphicsGetCurrentContext()!
+    //圆的边框宽度为w
+    CGContextSetLineWidth(context, w)
+    CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+    let rect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
+    CGContextAddEllipseInRect(context, rect)
+    CGContextClip(context)
+    //在圆区域内画出image原图
+    image.drawInRect(rect)
+    CGContextAddEllipseInRect(context, rect)
+    CGContextStrokePath(context)
+    //生成新的image
+    let newimg: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return newimg
+}
+
 backView.backgroundColor = UIColor.blackColor()
 //corner(backView)
-transform(backView)
+//transform(backView)
+let view=UIImageView(image: UIImage(data: NSData(contentsOfURL: NSURL(string: "https://avatars2.githubusercontent.com/u/14151735?v=3&s=460")!)!))
+view.image = circleImage(view.image!, withParam: 20)
+backView.addSubview(view)
 backView
